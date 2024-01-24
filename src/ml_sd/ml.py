@@ -10,7 +10,7 @@ if TYPE_CHECKING:
     from PIL import Image
 
 
-model_id_or_path = "/sd-webui/src/ml_sd/models_sd/lyriel-v1-6.safetensors"
+model_id_or_path = "runwayml/stable-diffusion-v1-5"
 
 # lora_model_id_or_path = "patrickvonplaten/lora_dreambooth_dog_example"
 
@@ -20,7 +20,7 @@ ip_adapter_image = load_image(
 )
 
 
-pipe = StableDiffusionPipeline.from_single_file(model_id_or_path, torch_dtype=torch.float16)
+pipe = StableDiffusionPipeline.from_pretrained(model_id_or_path, torch_dtype=torch.float16)
 pipe.safety_checker = None
 pipe.requires_safety_checker = False
 
