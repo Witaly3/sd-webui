@@ -3,12 +3,10 @@ services:
   app:
     build:
       context: .
-    # env_file:
-    #   - .env
+    env_file:
+      - .env
     container_name: sd_webui_app
     command: ["/sd-webui/deploy/app.sh"]
-    ports:
-      - "8000:8000"
     deploy:
       resources:
         reservations:

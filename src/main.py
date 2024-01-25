@@ -1,17 +1,11 @@
-import os
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
 
+from ml_sd.gradio import launch_gradio
 from ml_sd.router import router as router_app
 
 
 app = FastAPI(title="SD-WEBUI App")
-os.makedirs("static", exist_ok=True)
-app.mount("/static", StaticFiles(directory="static"), name="static")
-templates = Jinja2Templates(directory="templates")
 
 origins = ["http://localhost:8000"]
 
@@ -27,3 +21,7 @@ app.add_middleware(
 
 app.include_router(router_app)
 
+
+@app.on_event("startup")
+async def startup_event() -> None:
+    launch_gradio()
